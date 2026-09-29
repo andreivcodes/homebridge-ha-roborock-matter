@@ -1,0 +1,97 @@
+{
+  "pluginAlias": "HaRoborockMatter",
+  "pluginType": "platform",
+  "singular": true,
+  "strictValidation": false,
+  "headerDisplay": "Exposes Roborock vacuums from the Home Assistant Roborock integration to Apple Home as native Matter robot vacuums. Each vacuum gets its own Matter pairing code (shown in the Homebridge UI). Requires Matter to be enabled on the bridge.",
+  "schema": {
+    "type": "object",
+    "properties": {
+      "name": {
+        "title": "Name",
+        "type": "string",
+        "default": "HA Roborock Matter",
+        "required": true
+      },
+      "haUrl": {
+        "title": "Home Assistant URL",
+        "type": "string",
+        "placeholder": "http://homeassistant.local:8123",
+        "required": true
+      },
+      "haToken": {
+        "title": "Long-lived access token",
+        "description": "Create it in Home Assistant under Profile > Security. An admin user is recommended: room discovery with HA area mapping uses admin-only APIs.",
+        "type": "string",
+        "required": true
+      },
+      "vacuums": {
+        "title": "Vacuums",
+        "type": "array",
+        "minItems": 1,
+        "items": {
+          "type": "object",
+          "properties": {
+            "entityId": {
+              "title": "Vacuum entity",
+              "type": "string",
+              "placeholder": "vacuum.roborock_s7_maxv",
+              "required": true,
+              "pattern": "^vacuum\\.[a-z0-9_]+$"
+            },
+            "name": {
+              "title": "Name in Apple Home",
+              "description": "Defaults to the device name in Home Assistant.",
+              "type": "string"
+            },
+            "dockAlerts": {
+              "title": "Dock alerts in Apple Home",
+              "description": "Matter has no separate dock alert: a dock problem puts the vacuum into an error state, and Apple Home then blocks Start and room selection until it is fixed or the mode changes. Robot-side faults are always reported.",
+              "type": "string",
+              "default": "mop",
+              "oneOf": [
+                { "title": "Water tank problems, only while a mop mode is selected", "enum": ["mop"] },
+                { "title": "All dock problems", "enum": ["always"] },
+                { "title": "Off", "enum": ["off"] }
+              ]
+            },
+            "maxFanSpeed": {
+              "title": "Suction used for Apple Home's \"Max\" intensity",
+              "type": "string",
+              "default": "max",
+              "oneOf": [
+                { "title": "Max", "enum": ["max"] },
+                { "title": "Turbo", "enum": ["turbo"] },
+                { "title": "Max+ (if supported)", "enum": ["max_plus"] }
+              ]
+            },
+            "roomTypes": {
+              "title": "Room icon overrides",
+              "description": "Room name -> Matter area type (e.g. \"Den\": \"FamilyRoom\"). Room types are otherwise guessed from the name.",
+              "type": "object",
+              "additionalProperties": { "type": "string" }
+            },
+            "entities": {
+              "title": "Entity overrides",
+              "description": "Only needed if auto-discovery picks the wrong entity.",
+              "type": "object",
+              "properties": {
+                "status": { "title": "Status sensor", "type": "string" },
+                "vacuumError": { "title": "Vacuum error sensor", "type": "string" },
+                "dockError": { "title": "Dock error sensor", "type": "string" },
+                "battery": { "title": "Battery sensor", "type": "string" },
+                "charging": { "title": "Charging binary sensor", "type": "string" },
+                "inCleaning": { "title": "Cleaning binary sensor", "type": "string" },
+                "currentRoom": { "title": "Current room sensor", "type": "string" },
+                "cleaningMode": { "title": "Cleaning mode select", "type": "string" },
+                "waterMode": { "title": "Mop intensity select", "type": "string" },
+                "mopRoute": { "title": "Mop mode (route) select", "type": "string" },
+                "selectedMap": { "title": "Selected map select", "type": "string" }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

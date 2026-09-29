@@ -1,0 +1,21 @@
+/** A docked, fully charged S7 MaxV as the HA Roborock integration reports it. */
+export const snapshot = (over = {}) => ({
+  available: true,
+  activity: 'docked',
+  status: 'charging_complete',
+  inCleaning: false,
+  charging: false,
+  battery: 100,
+  vacuumError: 'none',
+  dockError: 'ok',
+  fanSpeed: 'balanced',
+  fanSpeedList: ['quiet', 'balanced', 'turbo', 'max', 'gentle', 'custom'],
+  cleaningMode: 'vac_and_mop',
+  cleaningModeOptions: ['vacuum', 'vac_and_mop', 'mop', 'custom'],
+  waterMode: 'standard',
+  waterModeOptions: ['off', 'mild', 'standard', 'intense', 'custom'],
+  mopRoute: 'standard',
+  mopRouteOptions: ['standard', 'deep', 'deep_plus', 'fast', 'custom'],
+  currentRoom: null,
+  ...over,
+});
