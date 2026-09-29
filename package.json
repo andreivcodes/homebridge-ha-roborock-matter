@@ -33,6 +33,7 @@
   ],
   "scripts": {
     "build": "rimraf ./dist && tsc",
+    "prepare": "npm run build",
     "lint": "eslint . --max-warnings=0",
     "test": "npm run build && node --test test/*.test.js",
     "prepublishOnly": "npm run lint && npm test"
