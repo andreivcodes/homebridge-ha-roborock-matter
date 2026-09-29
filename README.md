@@ -38,16 +38,23 @@ models it treats differently (Q7/Q10, Zeo/Dyad) are untested.
 
 ## Install
 
-The plugin isn't on npm yet. Install the packaged release into your Homebridge
-directory, for example from the Homebridge UI terminal:
+The plugin isn't on npm yet. Download the packaged release into your Homebridge
+directory and install it from there, for example from the Homebridge UI terminal:
 
 ```bash
 cd /var/lib/homebridge
-npm install https://github.com/andreivcodes/homebridge-ha-roborock-matter/releases/download/v0.3.0/homebridge-ha-roborock-matter-0.3.0.tgz
+mkdir -p local-plugins
+curl -L -o local-plugins/homebridge-ha-roborock-matter-0.3.1.tgz \
+  https://github.com/andreivcodes/homebridge-ha-roborock-matter/releases/download/v0.3.1/homebridge-ha-roborock-matter-0.3.1.tgz
+npm install ./local-plugins/homebridge-ha-roborock-matter-0.3.1.tgz
 ```
 
-Then restart Homebridge. Pick the tarball of the latest version from the
+Then restart Homebridge. Keep the `.tgz` file where it is: Homebridge's
+`package.json` refers to it. To update, repeat with the latest tarball from the
 [releases page](https://github.com/andreivcodes/homebridge-ha-roborock-matter/releases).
+
+Downloading first matters: npm 12 refuses to install packages straight from a
+URL or a git repository by default.
 
 ## Configure
 

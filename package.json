@@ -1,7 +1,7 @@
 {
   "name": "homebridge-ha-roborock-matter",
   "displayName": "HA Roborock Matter",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Exposes a Roborock vacuum from Home Assistant to Apple Home as a native Matter robot vacuum (rooms, clean modes, errors, dock states).",
   "author": "Andrei Voinea",
   "license": "MIT",
@@ -33,7 +33,6 @@
   ],
   "scripts": {
     "build": "rimraf ./dist && tsc",
-    "prepare": "npm run build",
     "lint": "eslint . --max-warnings=0",
     "test": "npm run build && node --test test/*.test.js",
     "prepublishOnly": "npm run lint && npm test"
